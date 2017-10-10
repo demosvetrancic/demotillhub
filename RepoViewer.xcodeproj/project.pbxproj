@@ -14,6 +14,8 @@
 		2311C2D01F8D58C90069DB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2311C2CF1F8D58C90069DB17 /* Assets.xcassets */; };
 		2311C2D31F8D58C90069DB17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2311C2D11F8D58C90069DB17 /* LaunchScreen.storyboard */; };
 		2311C2DD1F8D59DE0069DB17 /* ApiConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */; };
+		2311C2DF1F8D5C0A0069DB17 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2DE1F8D5C0A0069DB17 /* BaseService.swift */; };
+		3CE324AA8DC59D5E86768887 /* Pods_RepoViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		2311C2D21F8D58C90069DB17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2311C2D41F8D58C90069DB17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiConf.swift; path = "Supporting Files/ApiConf.swift"; sourceTree = "<group>"; };
+		2311C2DE1F8D5C0A0069DB17 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseService.swift; path = "Service Communication/BaseService.swift"; sourceTree = "<group>"; };
+		3D3B3D5A2E082E568319E2D1 /* Pods-RepoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.release.xcconfig"; sourceTree = "<group>"; };
+		5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RepoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6041E67DC6CFE126BBBC6CDF /* Pods-RepoViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE324AA8DC59D5E86768887 /* Pods_RepoViewer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +51,8 @@
 			children = (
 				2311C2C41F8D58C80069DB17 /* RepoViewer */,
 				2311C2C31F8D58C80069DB17 /* Products */,
+				988CF00778099E29860B0256 /* Pods */,
+				67CD5E088B0B7AAE2264FAEC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +67,7 @@
 		2311C2C41F8D58C80069DB17 /* RepoViewer */ = {
 			isa = PBXGroup;
 			children = (
+				2311C2E01F8D5C1D0069DB17 /* Service Communication */,
 				2311C2C71F8D58C80069DB17 /* ViewController.swift */,
 				2311C2C91F8D58C90069DB17 /* Main.storyboard */,
 				2311C2CC1F8D58C90069DB17 /* RepoViewer.xcdatamodeld */,
@@ -78,6 +88,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2311C2E01F8D5C1D0069DB17 /* Service Communication */ = {
+			isa = PBXGroup;
+			children = (
+				2311C2DE1F8D5C0A0069DB17 /* BaseService.swift */,
+			);
+			name = "Service Communication";
+			sourceTree = "<group>";
+		};
+		67CD5E088B0B7AAE2264FAEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		988CF00778099E29860B0256 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6041E67DC6CFE126BBBC6CDF /* Pods-RepoViewer.debug.xcconfig */,
+				3D3B3D5A2E082E568319E2D1 /* Pods-RepoViewer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,9 +120,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2311C2D71F8D58C90069DB17 /* Build configuration list for PBXNativeTarget "RepoViewer" */;
 			buildPhases = (
+				4CF0D6D20A4309C34385A0F8 /* [CP] Check Pods Manifest.lock */,
 				2311C2BE1F8D58C80069DB17 /* Sources */,
 				2311C2BF1F8D58C80069DB17 /* Frameworks */,
 				2311C2C01F8D58C80069DB17 /* Resources */,
+				FEF951221DD06F757F785616 /* [CP] Embed Pods Frameworks */,
+				C3BF9AADF2D3AA382A1AB367 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,6 +184,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4CF0D6D20A4309C34385A0F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RepoViewer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3BF9AADF2D3AA382A1AB367 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEF951221DD06F757F785616 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2311C2BE1F8D58C80069DB17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -154,6 +246,7 @@
 				2311C2DD1F8D59DE0069DB17 /* ApiConf.swift in Sources */,
 				2311C2C81F8D58C80069DB17 /* ViewController.swift in Sources */,
 				2311C2C61F8D58C80069DB17 /* AppDelegate.swift in Sources */,
+				2311C2DF1F8D5C0A0069DB17 /* BaseService.swift in Sources */,
 				2311C2CE1F8D58C90069DB17 /* RepoViewer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +366,7 @@
 		};
 		2311C2D81F8D58C90069DB17 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6041E67DC6CFE126BBBC6CDF /* Pods-RepoViewer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 524SKWXGKC;
@@ -286,6 +380,7 @@
 		};
 		2311C2D91F8D58C90069DB17 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D3B3D5A2E082E568319E2D1 /* Pods-RepoViewer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 524SKWXGKC;

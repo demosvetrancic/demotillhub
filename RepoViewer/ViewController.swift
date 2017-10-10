@@ -14,6 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //
+        BaseService.shared.getRepos(withParam: "tetris", withCompletion:
+            {
+                items in
+                print("return: \(items)")
+        })
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,7 +8,21 @@
 
 import Foundation
 
+
+
+
 struct GitApi
 {
-    static let baseUrl = "https://api.github.com/search/repositories?q=tetris"
+    
+    static let defaultURL = "https://api.github.com/search/repositories?q=tetris"
+    static let baseURL = "https://api.github.com/"
+    static let defaultParam = "tetris"
+
 }
+
+enum GitApiService : String
+{
+    case searchRepository = "search/repositories"
+}
+
+
