@@ -37,7 +37,7 @@ struct GitApi
     static let pageParam = "&page="
     static let defaultPerPage = 10
     static let defaultParam = "tetris"
-    static let defaultBandwith : Int64 = 10000
+    static let defaultBandwith  = 10000
 }
 
 enum GitApiService : String

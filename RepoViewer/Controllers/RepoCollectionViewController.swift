@@ -101,11 +101,12 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
         //using frc to get obj and update the cell with info
         if let repoObject = fetchedResultsController?.object(at: indexPath), let repoCell = cell as? RepoCollectionViewCell {
             
+            
+            let est : Float = Float(repoObject.size)/Float(GitApi.defaultBandwith)
             repoCell.updateOutlets(withName: repoObject.name,
                                    withOwner: repoObject.ownerLoginName,
                                    withSize: String(repoObject.size),
-                                   withEstimatedTime: String(format: "%.2f",
-                                                             Float(repoObject.size/GitApi.defaultBandwith)),
+                                   withEstimatedTime: String(format:"%.2f",est),
                                    withWiki: repoObject.hasWiki)
             
         }

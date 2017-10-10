@@ -25,7 +25,7 @@ class RepoCollectionViewCell: UICollectionViewCell
         
         self.labelSize.text = size
         
-        self.labelEstimatedTime.text = NSLocalizedString("est.time: \(estimatedTime)s", comment: "")
+        self.labelEstimatedTime.text = NSLocalizedString("est.time: \(estimatedTime!)s", comment: "")
         
         self.backgroundColor = hasWiki ? UIColor.init(rgb:RepoCellStyle.hasWikiColor) : UIColor.init(rgb:RepoCellStyle.hasNoWikiColor)
         
