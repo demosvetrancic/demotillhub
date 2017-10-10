@@ -9,7 +9,22 @@
 import Foundation
 
 
-
+struct RepositoryKey
+{
+    
+    //Response key - array of Repos
+    static let responseItems = "items"
+    static let responseTotalCount = "total_count"
+    
+    //Repo Keys
+    static let name = "name"
+    static let owner = "owner"
+    static let ownerLoginName = "owner.login"
+    static let hasWiki = "has_wiki"
+    static let size = "size"
+    static let identifier = "id"
+    
+}
 
 struct GitApi
 {
@@ -24,5 +39,4 @@ enum GitApiService : String
 {
     case searchRepository = "search/repositories"
 }
-
 
