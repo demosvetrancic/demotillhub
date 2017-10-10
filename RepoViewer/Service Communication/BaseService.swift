@@ -10,47 +10,59 @@ import Foundation
 import Alamofire
 
 
+/// Singleton networking class
 class BaseService
 {
     
+    /// Singleton shared instance
     static let shared = BaseService()
     
     private init()
     {}
     
-    func getRepos(withParam param: String?, withCompletion completion:@escaping ([[String:Any]]?) -> Void )
+    /// method to fetch repositories with 'query' parameter and with paging
+    ///
+    /// - Parameters:
+    ///   - param: searchTerm for query
+    ///   - page: currentPage to retreive
+    ///   - completion: closure
+    func getRepos(withParam param: String?,withPage page:Int, withCompletion completion:@escaping ([[String:Any]]?,Int) -> Void )
     {
-        //https://api.github.com/search/repositories?q=tetris
-        let urlRequest = "\(GitApi.baseURL)\(GitApiService.searchRepository.rawValue)?q=\(param!)"
+        //new paging url request, should add as params to af request but...
+        //https://api.github.com/search/repositories?q=tetris?
+        let urlRequest = "\(GitApi.baseURL)\(GitApiService.searchRepository.rawValue)?q=\(param!)\(GitApi.perPageParam)\(GitApi.defaultPerPage)\(GitApi.pageParam)\(String(page))"
         
         Alamofire.request(urlRequest)
             .validate()
             .responseJSON
             { response in
                 
+                //checking the results
                 guard response.result.isSuccess else
                 {
                     print("Error: \(response.result.error?.localizedDescription)")
-                    completion(nil)
+                    completion(nil, 1)
                     return
                 }
                 
                 //todo
                 print("Github data response: \(response)")
                 
+                //retrieving items and total_count from resposnse
                 guard let responseJSON = response.result.value as? [String: Any],
-                    let items = responseJSON["items"] as? [[String:Any]]
+                    let items = responseJSON[RepositoryKey.responseItems] as? [[String:Any]], let totalCount = responseJSON[RepositoryKey.responseTotalCount] as? Int
                     else
                 {
                     print ("Error parsing")
-                    completion(nil)
+                    completion(nil, 1)
                     return
                 }
                 print("Items: \(items)")
-                print("FirstSize: \(items.first?["size"])")
-                completion(items)
+                print("FirstSize: \(items.first?[RepositoryKey.size])")
                 
                 
+                completion(items, totalCount)
+
         }
     }
     

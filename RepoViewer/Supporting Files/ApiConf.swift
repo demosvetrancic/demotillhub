@@ -6,6 +6,7 @@
 //  Copyright © 2017 svetrancic. All rights reserved.
 //
 
+
 import Foundation
 
 
@@ -31,8 +32,10 @@ struct GitApi
     
     static let defaultURL = "https://api.github.com/search/repositories?q=tetris"
     static let baseURL = "https://api.github.com/"
+    static let perPageParam = "&per_page="
+    static let pageParam = "&page="
+    static let defaultPerPage = 10
     static let defaultParam = "tetris"
-
 }
 
 enum GitApiService : String

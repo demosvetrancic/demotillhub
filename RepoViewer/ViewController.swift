@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //
-        BaseService.shared.getRepos(withParam: "tetris", withCompletion:
+        BaseService.shared.getRepos(withParam: "tetris",withPage: 1, withCompletion:
             {
                 items in
                 print("return: \(items)")
