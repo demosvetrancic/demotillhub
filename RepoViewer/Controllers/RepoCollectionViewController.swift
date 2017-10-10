@@ -74,7 +74,7 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
             repoCell.updateOutlets(withName: repoObject.name,
                                    withOwner: repoObject.ownerLoginName,
                                    withSize: String(repoObject.size),
-                                   withEstimatedTime: String(10),
+                                   withEstimatedTime: String(repoObject.size/GitApi.defaultBandwith),
                                    withWiki: repoObject.hasWiki)
             
         }
@@ -89,14 +89,17 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
         return fetchedResultsController?.sections?.count ?? 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
         if let sections = fetchedResultsController?.sections, sections.count > 0 {
             return sections[section].numberOfObjects
         } else {
             return 0
         }
-    
         
+    }
+    
+    
     /// post fetching refresh method. after accumulating fetch pages with same terms, filters up the existing data with the latest - currentTerm
     func updateUI()
     {
@@ -115,14 +118,9 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
                 cacheName: nil
             )
             try? fetchedResultsController?.performFetch()
-            collectionView.reloadData()
+            collectionView?.reloadData()
         }
     }
-    
-    
-  
-    }
-    
   
     
     
@@ -182,21 +180,38 @@ extension RepoCollectionViewController : UITextFieldDelegate
 extension RepoCollectionViewController
 {
 
-     func fetchRepos(withTerm term:String?, withPage page: Int)
+    
+    /// fetching repos with page from network
+    ///
+    /// - Parameters:
+    ///   - term: <#term description#>
+    ///   - page: <#page description#>
+    func fetchRepos(withTerm term:String?, withPage page: Int)
     {
-        BaseService.shared.getRepos(withParam: term, withPage: page, withCompletion: {
+        BaseService.shared.getRepos(withParam: term,
+                                    withPage: page,
+                                    withCompletion: {
             (items, totalCount) in
             if (items != nil)
             {
                 self.totalPages = totalCount/GitApi.defaultPerPage
                 self.updateDatabase(with: items!)
                 //self?.searchTerm = "tetris"
+                self.refreshControl?.endRefreshing()
             }
+            else
+            {
+                self.refreshControl?.endRefreshing()
+            }
+                
      
         })
     }
     
     
+    /// Updateing database with fetched repos. does perform distinct addition to db
+    ///
+    /// - Parameter repos: <#repos description#>
     func updateDatabase(with repos: [[String: Any]])
     {
         print("loading database...")
@@ -213,6 +228,9 @@ extension RepoCollectionViewController
         }
     }
     
+    
+    
+    /// Prints some inforamtion for checkings on safe tthread
     func printDatabaseStatistics()
     {
         if let context = container?.viewContext {
@@ -232,7 +250,7 @@ extension RepoCollectionViewController
                     
                 }
                 //todo
-                //self.updateUI()
+                self.updateUI()
                 
             }
         }
