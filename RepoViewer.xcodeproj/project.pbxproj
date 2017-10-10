@@ -18,6 +18,7 @@
 		2311C2E61F8D70760069DB17 /* RepoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2E51F8D70760069DB17 /* RepoCollectionViewController.swift */; };
 		2311C2E91F8D717D0069DB17 /* RepoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2E81F8D717D0069DB17 /* RepoCollectionViewCell.swift */; };
 		2311C2EB1F8D72A50069DB17 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2EA1F8D72A50069DB17 /* HeaderCollectionReusableView.swift */; };
+		2311C2EF1F8D7E4B0069DB17 /* FetchedResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2EE1F8D7E4B0069DB17 /* FetchedResultsCollectionViewController.swift */; };
 		3CE324AA8DC59D5E86768887 /* Pods_RepoViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		2311C2E51F8D70760069DB17 /* RepoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepoCollectionViewController.swift; path = Controllers/RepoCollectionViewController.swift; sourceTree = "<group>"; };
 		2311C2E81F8D717D0069DB17 /* RepoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepoCollectionViewCell.swift; path = "Reusable Files/RepoCollectionViewCell.swift"; sourceTree = "<group>"; };
 		2311C2EA1F8D72A50069DB17 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCollectionReusableView.swift; path = "Reusable Files/HeaderCollectionReusableView.swift"; sourceTree = "<group>"; };
+		2311C2EE1F8D7E4B0069DB17 /* FetchedResultsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchedResultsCollectionViewController.swift; path = Controllers/FetchedResultsCollectionViewController.swift; sourceTree = "<group>"; };
 		3D3B3D5A2E082E568319E2D1 /* Pods-RepoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.release.xcconfig"; sourceTree = "<group>"; };
 		5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RepoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6041E67DC6CFE126BBBC6CDF /* Pods-RepoViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				2311C2E51F8D70760069DB17 /* RepoCollectionViewController.swift */,
+				2311C2EE1F8D7E4B0069DB17 /* FetchedResultsCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				2311C2E91F8D717D0069DB17 /* RepoCollectionViewCell.swift in Sources */,
 				2311C2DF1F8D5C0A0069DB17 /* BaseService.swift in Sources */,
 				2311C2CE1F8D58C90069DB17 /* RepoViewer.xcdatamodeld in Sources */,
+				2311C2EF1F8D7E4B0069DB17 /* FetchedResultsCollectionViewController.swift in Sources */,
 				2311C2E21F8D64070069DB17 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,8 @@ import CoreData
 
 
 /// class for repo collection view scene
-class RepoCollectionViewController : UIViewController{
+class RepoCollectionViewController : FetchedResultsCollectionViewController
+{
     
     // MARK: Properties
     
@@ -36,6 +37,11 @@ class RepoCollectionViewController : UIViewController{
         }
     }
     
+    
+    ///  attached fetched result controller instance
+    var fetchedResultsController : NSFetchedResultsController<Repository>?
+
+    
     //MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -47,7 +53,92 @@ class RepoCollectionViewController : UIViewController{
         
     }
     
-    private func fetchRepos(withTerm term:String?, withPage page: Int)
+    //MARK: CollectionViewDelegate
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Repository Cell", for: indexPath)
+        
+        //using frc to get obj and update the cell with info
+        if let repoObject = fetchedResultsController?.object(at: indexPath), let repoCell = cell as? RepoCollectionViewCell {
+            
+            repoCell.updateOutlets(withName: repoObject.name,
+                                   withOwner: repoObject.ownerLoginName,
+                                   withSize: String(repoObject.size),
+                                   withEstimatedTime: String(10),
+                                   withWiki: repoObject.hasWiki)
+            
+        }
+        
+        
+        
+        return cell;
+    }
+    
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let sections = fetchedResultsController?.sections, sections.count > 0 {
+            return sections[section].numberOfObjects
+        } else {
+            return 0
+        }
+    
+        
+    /// post fetching refresh method. after accumulating fetch pages with same terms, filters up the existing data with the latest - currentTerm
+    func updateUI()
+    {
+        if let context = container?.viewContext, searchTerm != nil
+        {
+            let request: NSFetchRequest<Repository> = Repository.fetchRequest()
+            
+            let selector = #selector(NSString.localizedStandardCompare(_:))
+            request.predicate = NSPredicate(format: "name contains[c] %@", searchTerm!)
+            
+            request.sortDescriptors = [NSSortDescriptor(key: RepositoryKey.name, ascending: true, selector:selector)]
+            fetchedResultsController = NSFetchedResultsController<Repository>(
+                fetchRequest: request,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            try? fetchedResultsController?.performFetch()
+            collectionView.reloadData()
+        }
+    }
+    
+    
+  
+    }
+    
+  
+    
+    
+    
+    //Header view
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header ReusableView", for: indexPath)
+        if let headerView = header as? HeaderCollectionReusableView
+        {
+            headerView.textField.delegate = self
+        }
+        return header
+    }
+    
+}
+extension RepoCollectionViewController : UITextFieldDelegate
+{
+    
+}
+
+extension RepoCollectionViewController
+{
+
+     func fetchRepos(withTerm term:String?, withPage page: Int)
     {
         BaseService.shared.getRepos(withParam: term, withPage: page, withCompletion: {
             (items, totalCount) in
@@ -62,7 +153,7 @@ class RepoCollectionViewController : UIViewController{
     }
     
     
-    private func updateDatabase(with repos: [[String: Any]])
+    func updateDatabase(with repos: [[String: Any]])
     {
         print("loading database...")
         container?.performBackgroundTask
@@ -96,7 +187,8 @@ class RepoCollectionViewController : UIViewController{
                     print("Number of repositories: \(repoCount)")
                     
                 }
-                //todo self.updateOutlets()
+                //todo
+                //self.updateUI()
                 
             }
         }
@@ -104,12 +196,7 @@ class RepoCollectionViewController : UIViewController{
     
 
     
-    
-    
 
-
-    
 }
-
 
 
