@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2311C2C61F8D58C80069DB17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2C51F8D58C80069DB17 /* AppDelegate.swift */; };
-		2311C2C81F8D58C80069DB17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2C71F8D58C80069DB17 /* ViewController.swift */; };
 		2311C2CB1F8D58C90069DB17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2311C2C91F8D58C90069DB17 /* Main.storyboard */; };
 		2311C2CE1F8D58C90069DB17 /* RepoViewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2CC1F8D58C90069DB17 /* RepoViewer.xcdatamodeld */; };
 		2311C2D01F8D58C90069DB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2311C2CF1F8D58C90069DB17 /* Assets.xcassets */; };
@@ -16,13 +15,15 @@
 		2311C2DD1F8D59DE0069DB17 /* ApiConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */; };
 		2311C2DF1F8D5C0A0069DB17 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2DE1F8D5C0A0069DB17 /* BaseService.swift */; };
 		2311C2E21F8D64070069DB17 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2E11F8D64070069DB17 /* Repository.swift */; };
+		2311C2E61F8D70760069DB17 /* RepoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2E51F8D70760069DB17 /* RepoCollectionViewController.swift */; };
+		2311C2E91F8D717D0069DB17 /* RepoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2E81F8D717D0069DB17 /* RepoCollectionViewCell.swift */; };
+		2311C2EB1F8D72A50069DB17 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2EA1F8D72A50069DB17 /* HeaderCollectionReusableView.swift */; };
 		3CE324AA8DC59D5E86768887 /* Pods_RepoViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2311C2C21F8D58C80069DB17 /* RepoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2311C2C51F8D58C80069DB17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2311C2C71F8D58C80069DB17 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2311C2CA1F8D58C90069DB17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2311C2CD1F8D58C90069DB17 /* RepoViewer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RepoViewer.xcdatamodel; sourceTree = "<group>"; };
 		2311C2CF1F8D58C90069DB17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,6 +32,9 @@
 		2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiConf.swift; path = "Supporting Files/ApiConf.swift"; sourceTree = "<group>"; };
 		2311C2DE1F8D5C0A0069DB17 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseService.swift; path = "Service Communication/BaseService.swift"; sourceTree = "<group>"; };
 		2311C2E11F8D64070069DB17 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repository.swift; path = Entities/Repository.swift; sourceTree = "<group>"; };
+		2311C2E51F8D70760069DB17 /* RepoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepoCollectionViewController.swift; path = Controllers/RepoCollectionViewController.swift; sourceTree = "<group>"; };
+		2311C2E81F8D717D0069DB17 /* RepoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepoCollectionViewCell.swift; path = "Reusable Files/RepoCollectionViewCell.swift"; sourceTree = "<group>"; };
+		2311C2EA1F8D72A50069DB17 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderCollectionReusableView.swift; path = "Reusable Files/HeaderCollectionReusableView.swift"; sourceTree = "<group>"; };
 		3D3B3D5A2E082E568319E2D1 /* Pods-RepoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.release.xcconfig"; sourceTree = "<group>"; };
 		5C931D5ACD658272314BF5A0 /* Pods_RepoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RepoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6041E67DC6CFE126BBBC6CDF /* Pods-RepoViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,7 +75,8 @@
 			children = (
 				2311C2E01F8D5C1D0069DB17 /* Service Communication */,
 				2311C2E31F8D640C0069DB17 /* Entities */,
-				2311C2C71F8D58C80069DB17 /* ViewController.swift */,
+				2311C2E41F8D70340069DB17 /* Controllers */,
+				2311C2E71F8D71280069DB17 /* ReusableFiles */,
 				2311C2C91F8D58C90069DB17 /* Main.storyboard */,
 				2311C2CC1F8D58C90069DB17 /* RepoViewer.xcdatamodeld */,
 				2311C2DB1F8D59A50069DB17 /* Supporting Files */,
@@ -105,6 +110,23 @@
 				2311C2E11F8D64070069DB17 /* Repository.swift */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		2311C2E41F8D70340069DB17 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2311C2E51F8D70760069DB17 /* RepoCollectionViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2311C2E71F8D71280069DB17 /* ReusableFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2311C2E81F8D717D0069DB17 /* RepoCollectionViewCell.swift */,
+				2311C2EA1F8D72A50069DB17 /* HeaderCollectionReusableView.swift */,
+			);
+			name = ReusableFiles;
 			sourceTree = "<group>";
 		};
 		67CD5E088B0B7AAE2264FAEC /* Frameworks */ = {
@@ -254,9 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2311C2EB1F8D72A50069DB17 /* HeaderCollectionReusableView.swift in Sources */,
+				2311C2E61F8D70760069DB17 /* RepoCollectionViewController.swift in Sources */,
 				2311C2DD1F8D59DE0069DB17 /* ApiConf.swift in Sources */,
-				2311C2C81F8D58C80069DB17 /* ViewController.swift in Sources */,
 				2311C2C61F8D58C80069DB17 /* AppDelegate.swift in Sources */,
+				2311C2E91F8D717D0069DB17 /* RepoCollectionViewCell.swift in Sources */,
 				2311C2DF1F8D5C0A0069DB17 /* BaseService.swift in Sources */,
 				2311C2CE1F8D58C90069DB17 /* RepoViewer.xcdatamodeld in Sources */,
 				2311C2E21F8D64070069DB17 /* Repository.swift in Sources */,

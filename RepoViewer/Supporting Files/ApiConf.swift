@@ -15,6 +15,7 @@ struct RepositoryKey
     
     //Response key - array of Repos
     static let responseItems = "items"
+    //Response key - total count in array of repos
     static let responseTotalCount = "total_count"
     
     //Repo Keys
@@ -36,6 +37,7 @@ struct GitApi
     static let pageParam = "&page="
     static let defaultPerPage = 10
     static let defaultParam = "tetris"
+    static let defaultBandwith = 10000
 }
 
 enum GitApiService : String
@@ -43,3 +45,10 @@ enum GitApiService : String
     case searchRepository = "search/repositories"
 }
 
+
+struct RepoCellStyle
+{
+    static let hasWikiColor = 0xFFC766
+    static let hasNoWikiColor = 0xFFFFFFFF
+    
+}
