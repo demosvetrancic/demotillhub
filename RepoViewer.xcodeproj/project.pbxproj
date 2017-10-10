@@ -13,6 +13,7 @@
 		2311C2CE1F8D58C90069DB17 /* RepoViewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2CC1F8D58C90069DB17 /* RepoViewer.xcdatamodeld */; };
 		2311C2D01F8D58C90069DB17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2311C2CF1F8D58C90069DB17 /* Assets.xcassets */; };
 		2311C2D31F8D58C90069DB17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2311C2D11F8D58C90069DB17 /* LaunchScreen.storyboard */; };
+		2311C2DD1F8D59DE0069DB17 /* ApiConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2311C2CF1F8D58C90069DB17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2311C2D21F8D58C90069DB17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2311C2D41F8D58C90069DB17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiConf.swift; path = "Supporting Files/ApiConf.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,24 @@
 		2311C2C41F8D58C80069DB17 /* RepoViewer */ = {
 			isa = PBXGroup;
 			children = (
-				2311C2C51F8D58C80069DB17 /* AppDelegate.swift */,
 				2311C2C71F8D58C80069DB17 /* ViewController.swift */,
 				2311C2C91F8D58C90069DB17 /* Main.storyboard */,
+				2311C2CC1F8D58C90069DB17 /* RepoViewer.xcdatamodeld */,
+				2311C2DB1F8D59A50069DB17 /* Supporting Files */,
+			);
+			path = RepoViewer;
+			sourceTree = "<group>";
+		};
+		2311C2DB1F8D59A50069DB17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2311C2DC1F8D59DE0069DB17 /* ApiConf.swift */,
+				2311C2C51F8D58C80069DB17 /* AppDelegate.swift */,
 				2311C2CF1F8D58C90069DB17 /* Assets.xcassets */,
 				2311C2D11F8D58C90069DB17 /* LaunchScreen.storyboard */,
 				2311C2D41F8D58C90069DB17 /* Info.plist */,
-				2311C2CC1F8D58C90069DB17 /* RepoViewer.xcdatamodeld */,
 			);
-			path = RepoViewer;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2311C2DD1F8D59DE0069DB17 /* ApiConf.swift in Sources */,
 				2311C2C81F8D58C80069DB17 /* ViewController.swift in Sources */,
 				2311C2C61F8D58C80069DB17 /* AppDelegate.swift in Sources */,
 				2311C2CE1F8D58C90069DB17 /* RepoViewer.xcdatamodeld in Sources */,
