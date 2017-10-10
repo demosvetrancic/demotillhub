@@ -61,6 +61,36 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
         
     }
     
+    
+    //MARK: Outlet setups
+    /// post fetching refresh method. after accumulating fetch pages with same terms, filters up the existing data with the latest - currentTerm
+    ///Predicate - filtering the results with the ones who match case with the currentTerm (thats why there may not be all 10 objects from the batch)
+    ///would not need any predicate if we didnt want to accumulate objects from different terms
+    func updateUI()
+    {
+        if let context = container?.viewContext, searchTerm != nil
+        {
+            let request: NSFetchRequest<Repository> = Repository.fetchRequest()
+            
+            //using standard comparison to filter the acumulated objects.
+            let selector = #selector(NSString.localizedStandardCompare(_:))
+            
+            
+            request.predicate = NSPredicate(format: "name contains[c] %@", searchTerm!)
+            
+            request.sortDescriptors = [NSSortDescriptor(key: RepositoryKey.name, ascending: true, selector:selector)]
+            fetchedResultsController = NSFetchedResultsController<Repository>(
+                fetchRequest: request,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            try? fetchedResultsController?.performFetch()
+            collectionView?.reloadData()
+        }
+    }
+    
+    
     //MARK: CollectionViewDelegate
     
     
@@ -74,7 +104,8 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
             repoCell.updateOutlets(withName: repoObject.name,
                                    withOwner: repoObject.ownerLoginName,
                                    withSize: String(repoObject.size),
-                                   withEstimatedTime: String(repoObject.size/GitApi.defaultBandwith),
+                                   withEstimatedTime: String(format: "%.2f",
+                                                             Float(repoObject.size/GitApi.defaultBandwith)),
                                    withWiki: repoObject.hasWiki)
             
         }
@@ -99,31 +130,7 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
         
     }
     
-    
-    /// post fetching refresh method. after accumulating fetch pages with same terms, filters up the existing data with the latest - currentTerm
-    func updateUI()
-    {
-        if let context = container?.viewContext, searchTerm != nil
-        {
-            let request: NSFetchRequest<Repository> = Repository.fetchRequest()
-            
-            let selector = #selector(NSString.localizedStandardCompare(_:))
-            request.predicate = NSPredicate(format: "name contains[c] %@", searchTerm!)
-            
-            request.sortDescriptors = [NSSortDescriptor(key: RepositoryKey.name, ascending: true, selector:selector)]
-            fetchedResultsController = NSFetchedResultsController<Repository>(
-                fetchRequest: request,
-                managedObjectContext: context,
-                sectionNameKeyPath: nil,
-                cacheName: nil
-            )
-            try? fetchedResultsController?.performFetch()
-            collectionView?.reloadData()
-        }
-    }
-  
-    
-    
+ 
     
     /// Preparing Header View with textfield for search
     ///
@@ -142,44 +149,14 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
     }
     
 }
+
+
+
+
+// MARK: - Extension for fethcing and data updating
 extension RepoCollectionViewController
 {
     
-    func addRefreshControl()
-    {
-        //refreshControl = UIRefreshControl()
-        refreshControl?.tintColor = .gray
-        
-        refreshControl?.attributedTitle = NSAttributedString(string:NSLocalizedString("Fetching for current term", comment: ""))
-        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        collectionView?.addSubview(refreshControl!)
-        collectionView?.alwaysBounceVertical = true
-    }
-    
-    func refresh()
-    {
-        if (currentPage<=totalPages)
-        {
-            print("pagujemo")
-            fetchRepos(withTerm: searchTerm, withPage: currentPage)
-            currentPage+=1
-        }
-    }
-    
-}
-
-extension RepoCollectionViewController : UITextFieldDelegate
-{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        searchTerm = textField.text
-        return true
-    }
-}
-
-extension RepoCollectionViewController
-{
-
     
     /// fetching repos with page from network
     ///
@@ -191,20 +168,21 @@ extension RepoCollectionViewController
         BaseService.shared.getRepos(withParam: term,
                                     withPage: page,
                                     withCompletion: {
-            (items, totalCount) in
-            if (items != nil)
-            {
-                self.totalPages = totalCount/GitApi.defaultPerPage
-                self.updateDatabase(with: items!)
-                //self?.searchTerm = "tetris"
-                self.refreshControl?.endRefreshing()
-            }
-            else
-            {
-                self.refreshControl?.endRefreshing()
-            }
-                
-     
+                                        (items, totalCount) in
+                                        
+                                        if (items != nil)
+                                        {
+                                            self.totalPages = totalCount/GitApi.defaultPerPage
+                                            self.updateDatabase(with: items!)
+                                            //self?.searchTerm = "tetris"
+                                            self.refreshControl?.endRefreshing()
+                                        }
+                                        else
+                                        {
+                                            self.refreshControl?.endRefreshing()
+                                        }
+                                        
+                                        
         })
     }
     
@@ -214,23 +192,24 @@ extension RepoCollectionViewController
     /// - Parameter repos: <#repos description#>
     func updateDatabase(with repos: [[String: Any]])
     {
-        print("loading database...")
+        print("loading database..")
         container?.performBackgroundTask
             {
                 [weak self] context in
                 
-                for repoInfo in repos {
+                for repoInfo in repos
+                {
                     _ = try? Repository.findOrCreateRepo(matching: repoInfo as NSDictionary, in: context)
                 }
                 try? context.save()
-                print("done loading database...")
+                print("done loading database.")
                 self?.printDatabaseStatistics()
         }
     }
     
     
     
-    /// Prints some inforamtion for checkings on safe tthread
+    /// Prints some inforamtion for checkings on safe thread
     func printDatabaseStatistics()
     {
         if let context = container?.viewContext {
@@ -256,9 +235,49 @@ extension RepoCollectionViewController
         }
     }
     
-
     
-
+    
+    
 }
 
+
+
+
+// MARK: - UIRefreshControl
+extension RepoCollectionViewController
+{
+    
+    func addRefreshControl()
+    {
+        //refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = .gray
+        
+        refreshControl?.attributedTitle = NSAttributedString(string:NSLocalizedString("Fetching for current term", comment: ""))
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView?.addSubview(refreshControl!)
+        collectionView?.alwaysBounceVertical = true
+    }
+    
+    func refresh()
+    {
+        if (currentPage<=totalPages)
+        {
+            print("paging")
+            fetchRepos(withTerm: searchTerm, withPage: currentPage)
+            currentPage+=1
+        }
+    }
+    
+}
+
+
+// MARK: - UITextFieldDelegate
+extension RepoCollectionViewController : UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        searchTerm = textField.text
+        return true
+    }
+}
 
