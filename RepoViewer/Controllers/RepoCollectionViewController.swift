@@ -13,6 +13,9 @@ import CoreData
 /// class for repo collection view scene
 class RepoCollectionViewController : FetchedResultsCollectionViewController
 {
+    // MARK: Outlets
+    var refreshControl : UIRefreshControl? = UIRefreshControl()
+
     
     // MARK: Properties
     
@@ -47,8 +50,13 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       
+        //recheck
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
         
+        //preparing otulets
+        self.addRefreshControl()
+        //preparing props
         self.searchTerm = GitApi.defaultParam
         
     }
@@ -119,7 +127,13 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
     
     
     
-    //Header view
+    /// Preparing Header View with textfield for search
+    ///
+    /// - Parameters:
+    ///   - collectionView: <#collectionView description#>
+    ///   - kind: <#kind description#>
+    ///   - indexPath: <#indexPath description#>
+    /// - Returns: <#return value description#>
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header ReusableView", for: indexPath)
         if let headerView = header as? HeaderCollectionReusableView
@@ -130,9 +144,39 @@ class RepoCollectionViewController : FetchedResultsCollectionViewController
     }
     
 }
-extension RepoCollectionViewController : UITextFieldDelegate
+extension RepoCollectionViewController
 {
     
+    func addRefreshControl()
+    {
+        //refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = .gray
+        
+        refreshControl?.attributedTitle = NSAttributedString(string:NSLocalizedString("Fetching for current term", comment: ""))
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView?.addSubview(refreshControl!)
+        collectionView?.alwaysBounceVertical = true
+    }
+    
+    func refresh()
+    {
+        if (currentPage<=totalPages)
+        {
+            print("pagujemo")
+            fetchRepos(withTerm: searchTerm, withPage: currentPage)
+            currentPage+=1
+        }
+    }
+    
+}
+
+extension RepoCollectionViewController : UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        searchTerm = textField.text
+        return true
+    }
 }
 
 extension RepoCollectionViewController
